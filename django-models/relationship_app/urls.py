@@ -11,4 +11,14 @@ urlpatterns = [
     # Other Views
     path('books/', views.list_books, name='list_books'),
     path('library/<int:pk>/', views.LibraryDetailView.as_view(), name='library_detail'),
+
+from django.urls import path
+from .views import add_book, edit_book, delete_book
+
+urlpatterns = [
+    path('book/add/', add_book, name='add_book'),
+    path('book/edit/<int:book_id>/', edit_book, name='edit_book'),
+    path('book/delete/<int:book_id>/', delete_book, name='delete_book'),
+]
+
 ]
