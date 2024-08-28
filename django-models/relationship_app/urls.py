@@ -1,3 +1,5 @@
+# relationship_app/urls.py
+
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
@@ -13,7 +15,7 @@ urlpatterns = [
     path('library/<int:pk>/', views.LibraryDetailView.as_view(), name='library_detail'),
 
     # Book Management Views
-    path('book/add/', views.add_book, name="add_book"),
-    path('book/edit/<int:book_id>/', views.edit_book, name="edit_book"),
-    path('book/delete/<int:book_id>/', views.delete_book, name="delete_book"),
+    path('add_book/', views.add_book, name='add_book'),
+    path('edit_book/<int:book_id>/', views.edit_book, name='edit_book'),
+    path('delete_book/<int:book_id>/', views.delete_book, name='delete_book'),
 ]
