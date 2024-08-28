@@ -21,13 +21,17 @@ def books_in_library(library_name):
     books = library.books.all()
     return books
 
-# Retrieve the librarian for a library
+# Retrieve the librarian for a library using the reverse relationship
 def librarian_for_library(library_name):
     # Fetch the library object
     library = Library.objects.get(name=library_name)
-    # Retrieve the associated librarian
-    librarian = library.librarian
-    return librarian
+    # Retrieve the associated librarian using the reverse relationship
+    try:
+        librarian = Librarian.objects.get(library=library)
+        return librarian
+    except Librarian.DoesNotExist:
+        print(f"No librarian found for the library '{library_name}'")
+        return None
 
 # Example Usage
 if __name__ == "__main__":
@@ -41,4 +45,7 @@ if __name__ == "__main__":
 
     print("\nLibrarian for 'Central Library':")
     librarian = librarian_for_library("Central Library")
-    print(librarian.name if librarian else "No librarian found")
+    if librarian:
+        print(librarian.name)
+    else:
+        print("No librarian found")
