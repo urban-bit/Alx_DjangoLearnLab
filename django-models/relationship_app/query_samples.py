@@ -9,8 +9,10 @@ django.setup()
 
 # Query all books by a specific author
 def books_by_author(author_name):
+    # Fetch the author object
     author = Author.objects.get(name=author_name)
-    books = author.books.all()
+    # Filter books written by the author
+    books = Book.objects.filter(author=author)
     return books
 
 # List all books in a library
