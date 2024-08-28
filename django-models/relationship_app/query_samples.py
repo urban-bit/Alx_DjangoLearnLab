@@ -23,7 +23,9 @@ def books_in_library(library_name):
 
 # Retrieve the librarian for a library
 def librarian_for_library(library_name):
+    # Fetch the library object
     library = Library.objects.get(name=library_name)
+    # Retrieve the associated librarian
     librarian = library.librarian
     return librarian
 
@@ -38,4 +40,5 @@ if __name__ == "__main__":
         print(book.title)
 
     print("\nLibrarian for 'Central Library':")
-    print(librarian_for_library("Central Library").name)
+    librarian = librarian_for_library("Central Library")
+    print(librarian.name if librarian else "No librarian found")
