@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bookshelf',
+    'bookshelf',  # Add your app here
 ]
 
 MIDDLEWARE = [
@@ -123,5 +123,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Use the custom user model
 AUTH_USER_MODEL = 'bookshelf.CustomUser'
-
