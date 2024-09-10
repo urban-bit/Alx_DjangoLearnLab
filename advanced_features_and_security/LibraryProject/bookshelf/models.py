@@ -54,3 +54,27 @@ class CustomUser(AbstractUser):
             ("can_edit", "Can edit users"),
             ("can_delete", "Can delete users"),
         ]
+
+
+class Book(models.Model):
+    """
+    Model representing a book in the bookshelf.
+    """
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=100)
+    published_date = models.DateField()
+    isbn = models.CharField(max_length=13, unique=True)
+    pages = models.IntegerField()
+    cover = models.ImageField(upload_to='covers/', blank=True, null=True)
+    language = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        permissions = [
+            ("can_view_books", "Can view books"),
+            ("can_add_books", "Can add books"),
+            ("can_edit_books", "Can edit books"),
+            ("can_delete_books", "Can delete books"),
+        ]
