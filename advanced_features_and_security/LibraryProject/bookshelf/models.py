@@ -32,6 +32,7 @@ class CustomUserManager(BaseUserManager):
 
         return self.create_user(username, email, date_of_birth, password, **extra_fields)
 
+
 class CustomUser(AbstractUser):
     """
     Custom user model extending Django's AbstractUser.
@@ -44,3 +45,12 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+    class Meta:
+        # Custom permissions for managing CustomUser model instances
+        permissions = [
+            ("can_view", "Can view users"),
+            ("can_create", "Can create users"),
+            ("can_edit", "Can edit users"),
+            ("can_delete", "Can delete users"),
+        ]
