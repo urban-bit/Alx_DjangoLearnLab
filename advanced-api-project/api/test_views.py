@@ -3,17 +3,24 @@
 from django.urls import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
 from .models import Book, Author
 from .serializers import BookSerializer
 
 class BookAPITestCase(APITestCase):
     
     def setUp(self):
+        # Create a user for authentication
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
+        self.token = Token.objects.create(user=self.user)
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
+        
         # Create a sample author and books to use for testing
         self.author = Author.objects.create(name='Author 1')
         self.book1 = Book.objects.create(title='Test Book 1', publication_year=2000, author=self.author)
         self.book2 = Book.objects.create(title='Another Book', publication_year=2010, author=self.author)
-    
+
     # Test: List all books
     def test_list_books(self):
         url = reverse('book-list')  # URL for listing books
