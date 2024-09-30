@@ -13,6 +13,11 @@ class BookAPITestCase(APITestCase):
     def setUp(self):
         # Create a user for authentication
         self.user = User.objects.create_user(username='testuser', password='testpassword')
+
+        # Use session-based login (to satisfy the requirement)
+        self.client.login(username='testuser', password='testpassword')
+
+        # Create a token for the user (for token-based authentication)
         self.token = Token.objects.create(user=self.user)
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
         
