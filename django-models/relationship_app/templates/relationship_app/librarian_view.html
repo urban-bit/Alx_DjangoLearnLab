@@ -1,0 +1,42 @@
+<!-- librarian_view.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Librarian Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome, Librarian!</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'list_books' %}">View All Books</a></li>
+            <li><a href="{% url 'librarian_view' %}">Librarian Dashboard</a></li>
+            <li><a href="{% url 'member_view' %}">Member Dashboard</a></li>
+            <li><a href="{% url 'admin_view' %}">Admin Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Librarian Controls</h2>
+            <p>Manage the library's collection and assist members.</p>
+            <ul>
+                <li><a href="#">Check In/Out Books</a></li>
+                <li><a href="#">Catalog New Arrivals</a></li>
+                <li><a href="#">Assist Members</a></li>
+                <li><a href="#">Manage Library Inventory</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Library Management System. All rights reserved.</p>
+    </footer>
+</body>
+</html>
