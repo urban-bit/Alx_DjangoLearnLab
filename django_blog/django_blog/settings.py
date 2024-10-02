@@ -42,7 +42,7 @@ ROOT_URLCONF = 'django_blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [],  # You can add custom template directories here
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -110,5 +110,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 
+# STATICFILES_DIRS specifies additional locations to find static files during development
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',  # Assuming you have a 'static/' folder in the root of your project
+]
+
+# STATIC_ROOT is the folder where Django will collect all static files when you run collectstatic
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Use for deployment
+
+# Media files (user-uploaded files)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'  # Where uploaded files are stored
+
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Redirect URLs after login/logout (optional but useful for user authentication system)
+LOGIN_REDIRECT_URL = '/'  # Redirect to home page after login
+LOGOUT_REDIRECT_URL = '/login/'  # Redirect to login page after logout
