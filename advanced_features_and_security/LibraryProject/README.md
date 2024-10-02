@@ -1,1 +1,0 @@
-echo "# LibraryProject" > README.md
