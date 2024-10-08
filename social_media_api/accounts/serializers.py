@@ -13,18 +13,14 @@ class UserSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        # Create a new user instance
-        user = User(
+        # Use the create_user method from the custom manager
+        user = User.objects.create_user(
             username=validated_data['username'],
+            password=validated_data['password'],
             bio=validated_data.get('bio', ''),
             profile_picture=validated_data.get('profile_picture', '')
         )
-        user.set_password(validated_data['password'])  # Hash the password
-        user.save()  # Save the user instance
-        
-        # Create a token for the user
-        Token.objects.create(user=user)  
-        
+        Token.objects.create(user=user)  # Create a token for the user
         return user
 
 class LoginSerializer(serializers.Serializer):
