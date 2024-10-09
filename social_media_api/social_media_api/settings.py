@@ -1,5 +1,3 @@
-# social_media_api/settings.py
-
 import os
 from pathlib import Path
 
@@ -7,12 +5,12 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'your-secret-key-here'
+SECRET_KEY = 'your-secret-key-here'  # Replace with your actual secret key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = []  # Update this for production, e.g., ['yourdomain.com']
 
 # Application definition
 INSTALLED_APPS = [
@@ -22,8 +20,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'rest_framework.authtoken',
+    'rest_framework',  # Django REST Framework
+    'rest_framework.authtoken',  # Token authentication
     'accounts',  # Your accounts app for user management
 ]
 
