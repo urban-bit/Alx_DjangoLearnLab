@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username', 'password', 'bio', 'profile_picture')
         extra_kwargs = {
-            'password': {'write_only': True}  # Ensure password is write-only
+            'password': {'write_only': True}  # Ensure password is write-only.
         }
 
     def create(self, validated_data):
