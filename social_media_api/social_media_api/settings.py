@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'rest_framework',  # Django REST Framework
     'rest_framework.authtoken',  # Token authentication
     'accounts',  # Your accounts app for user management
+    'posts',  # Add your posts app here
 ]
 
 MIDDLEWARE = [
