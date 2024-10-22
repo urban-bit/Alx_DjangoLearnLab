@@ -3,8 +3,10 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import CustomUserCreationForm
-from django.contrib.auth.models import User
+from django.contrib.auth import views as auth_views  # Import Django's built-in authentication views
+from django.urls import reverse_lazy
 
+# Registration View
 def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -17,29 +19,22 @@ def register(request):
         form = CustomUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
 
-def user_login(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            messages.success(request, "Login successful.")
-            return redirect('profile')  # Redirect to profile or home
-        else:
-            messages.error(request, "Invalid username or password.")
-    return render(request, 'registration/login.html')
+# Use Django’s built-in LoginView
+class CustomLoginView(auth_views.LoginView):
+    template_name = 'registration/login.html'  # Specify your custom login template
+    redirect_authenticated_user = True  # Redirect users if they are already logged in
 
-def user_logout(request):
-    logout(request)
-    messages.success(request, "You have been logged out.")
-    return redirect('login')  # Redirect to login page after logout
+# Use Django’s built-in LogoutView
+class CustomLogoutView(auth_views.LogoutView):
+    template_name = 'registration/logged_out.html'  # Specify a template for logged-out users (optional)
 
+# Profile View
 @login_required
 def profile(request):
     user = request.user
     return render(request, 'registration/profile.html', {'user': user})
 
+# Edit Profile View
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
