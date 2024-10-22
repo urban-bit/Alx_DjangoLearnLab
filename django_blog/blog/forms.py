@@ -1,17 +1,18 @@
+# forms.py
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 class CustomUserCreationForm(UserCreationForm):
-    email = forms.EmailField(required=True, label="Email Address")
+    email = forms.EmailField(required=True)  # Make email a required field
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')  # Include email in the form fields
+        fields = ['username', 'email', 'password1', 'password2']  # Include email
 
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        user.email = self.cleaned_data['email']  # Save the email field
-        if commit:
-            user.save()
-        return user
+    # Optionally, you can add additional validation for email
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("This email is already registered.")
+        return email
